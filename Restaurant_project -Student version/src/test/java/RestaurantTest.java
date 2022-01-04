@@ -1,6 +1,10 @@
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -65,4 +69,14 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void when_selecting_items_from_menu_the_order_total_should_be_displayed() {
+        restaurant.addToMenu("Sweet corn soup", 119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("Vegetable soup", 169);
+        List<String> selectedItems = new ArrayList<>();
+        selectedItems.add("Vegetable lasagne");
+        selectedItems.add("Vegetable soup");
+        assertEquals(438, restaurant.orderTotal(selectedItems));
+    }
 }
